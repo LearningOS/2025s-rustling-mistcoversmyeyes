@@ -1,5 +1,11 @@
 // functions4.rs
 //
+
+/* rust函数的返回值规定与cpp不同：
+1.rust可以不显示指定函数的返回值，默认返回最后一个表达式的值(不加分号)，带分号的表达式默认返回`单元类型` "()"因此函数返回类型是()
+2.
+*/
+
 // This store is having a sale where if the price is an even number, you get 10
 // Rustbucks off, but if it's an odd number, it's 3 Rustbucks off. (Don't worry
 // about the function bodies themselves, we're only interested in the signatures

@@ -9,6 +9,12 @@
 
 struct ColorClassicStruct {
     // TODO: Something goes here
+    let red = 
+    let green 
+    let blue
+    ColorClassicStruct(red : i32,green : i32, blue : i32){
+
+    }
 }
 
 struct ColorTupleStruct(/* TODO: Something goes here */);

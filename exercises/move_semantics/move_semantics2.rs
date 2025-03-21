@@ -21,7 +21,7 @@ fn main() {
 }
 
 fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
-    let mut vec = vec;
+    let mut vec = vec;  //rust独有的变量遮蔽特性，可以创建一个同名变量覆盖掉之前的变量。
 
     vec.push(22);
     vec.push(44);
