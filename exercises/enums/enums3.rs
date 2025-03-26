@@ -9,6 +9,10 @@
 
 enum Message {
     // TODO: implement the message variant types based on their usage below
+    ChangeColor (i32 ,i32,i32),
+    Echo (String),
+    Move { x : i32 , y: i32 },
+    Quit,
 }
 
 struct Point {
