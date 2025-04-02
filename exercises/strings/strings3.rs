@@ -7,17 +7,34 @@
 
 fn trim_me(input: &str) -> String {
     // TODO: Remove whitespace from both ends of a string!
-    ???
+    input.trim().to_string()
 }
 
 fn compose_me(input: &str) -> String {
     // TODO: Add " world!" to the string! There's multiple ways to do this!
-    ???
-}
+    let mut result: String = input.to_string();
+    result.push_str(" world!");
+    result
 
+}
 fn replace_me(input: &str) -> String {
     // TODO: Replace "cars" in the string with "balloons"!
-    ???
+    // Option 1 - using regex
+    // use regex::Regex;
+    // Regex::new(r"cars").unwrap().replace_all(input, "balloons").to_string()
+    
+    // Option 2 - manual search with indexes
+    // let mut result = input.to_string();
+    // while let Some(pos) = result.find("cars") {
+    //     result.replace_range(pos..pos+4, "balloons");
+    // }
+    // result
+    
+    // Option 3 - split and join
+    // input.split("cars").collect::<Vec<&str>>().join("balloons")
+    
+    // My implementatiion 
+    input.replace ("cars","balloons")
 }
 
 #[cfg(test)]
