@@ -1,8 +1,7 @@
 // errors3.rs
 //
-// This is a program that is trying to use a completed version of the
-// `total_cost` function from the previous exercise. It's not working though!
-// Why not? What should we do to fix it?
+// 这是一个尝试使用上一个练习中完成版的`total_cost`函数的程序。但是它不能正常工作！
+// 为什么不行？我们应该怎么做来修复它？
 //
 // Execute `rustlings hint errors3` or use the `hint` watch subcommand for a
 // hint.
@@ -11,17 +10,19 @@
 
 use std::num::ParseIntError;
 
-fn main() {
+fn main() -> Result <(),ParseIntError> {
     let mut tokens = 100;
     let pretend_user_input = "8";
 
-    let cost = total_cost(pretend_user_input)?;
+    let cost = total_cost(pretend_user_input)?;//这里脱糖后实际上是使用了 match 匹配 Result 类型处理 Ok 和Err 两个 Variants
 
     if cost > tokens {
         println!("You can't afford that many!");
+        Ok(())
     } else {
         tokens -= cost;
         println!("You now have {} tokens.", tokens);
+        Ok(())//这个地方真的搞，不同于cpp main 函数返回 0 表示成功执行。rust 返回 Reasult enum 的 Ok(()) 类型标识 正常运行。
     }
 }
 
