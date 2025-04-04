@@ -1,26 +1,26 @@
 // quiz2.rs
 //
-// This is a quiz for the following sections:
-// - Strings
-// - Vecs
-// - Move semantics
-// - Modules
-// - Enums
+// 这是针对以下章节的小测验：
+// - 字符串
+// - 向量
+// - 所有权移动
+// - 模块
+// - 枚举
 //
-// Let's build a little machine in the form of a function. As input, we're going
-// to give a list of strings and commands. These commands determine what action
-// is going to be applied to the string. It can either be:
-// - Uppercase the string
-// - Trim the string
-// - Append "bar" to the string a specified amount of times
-// The exact form of this will be:
-// - The input is going to be a Vector of a 2-length tuple,
-//   the first element is the string, the second one is the command.
-// - The output element is going to be a Vector of strings.
+// 让我们以函数的形式构建一个小机器。作为输入，我们将
+// 提供一个字符串和命令的列表。这些命令决定对字符串
+// 应用什么操作。可以是：
+// - 将字符串转为大写
+// - 修剪字符串的空白
+// - 将"bar"附加到字符串后指定的次数
+// 具体形式将是：
+// - 输入将是一个二元组的向量，
+//   第一个元素是字符串，第二个是命令。
+// - 输出元素将是一个字符串的向量。
 //
-// No hints this time!
+// 这次没有提示！
 
-// I AM NOT DONE
+// 我还没完成
 
 pub enum Command {
     Uppercase,
@@ -31,12 +31,24 @@ pub enum Command {
 mod my_module {
     use super::Command;
 
-    // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
-        // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+    // 待办：完成函数签名！
+    pub fn transformer(input: Vec<(String,Command)> ) -> Vec<String> {
+        // 待办：完成输出声明！
+        let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
-            // TODO: Complete the function body. You can do it!
+            // 待办：完成函数体。你能做到的！
+            match command {
+                Command::Uppercase =>{
+                    output.push(string.to_uppercase());
+                }
+                Command::Trim => {
+                    output.push(string.trim().to_string());
+                }
+                Command::Append(num) =>{
+                    let bars = "bar".repeat(*num);
+                    output.push(string.to_string() + &bars);
+                }
+            }
         }
         output
     }
@@ -44,13 +56,13 @@ mod my_module {
 
 #[cfg(test)]
 mod tests {
-    // TODO: What do we need to import to have `transformer` in scope?
-    use ???;
+    // 待办：我们需要导入什么才能让`transformer`在作用域内？
     use super::Command;
+    // use crate::my_module::transformer;
 
     #[test]
     fn it_works() {
-        let output = transformer(vec![
+        let output = crate::my_module::transformer(vec![
             ("hello".into(), Command::Uppercase),
             (" all roads lead to rome! ".into(), Command::Trim),
             ("foo".into(), Command::Append(1)),
