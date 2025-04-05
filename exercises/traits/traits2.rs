@@ -1,8 +1,7 @@
 // traits2.rs
 //
-// Your task is to implement the trait `AppendBar` for a vector of strings. To
-// implement this trait, consider for a moment what it means to 'append "Bar"'
-// to a vector of strings.
+// 你的任务是为字符串向量实现 `AppendBar` 特质。要实现这个特质，请思考一下"附加'Bar'"
+// 到字符串向量上意味着什么。
 //
 // No boiler plate code this time, you can do this!
 //
@@ -15,6 +14,12 @@ trait AppendBar {
 }
 
 // TODO: Implement trait `AppendBar` for a vector of strings.
+impl AppendBar for Vec<String>  {
+    fn append_bar (mut self ) -> Self {
+        self.push("Bar".to_string());
+        self
+    }
+}
 
 #[cfg(test)]
 mod tests {
