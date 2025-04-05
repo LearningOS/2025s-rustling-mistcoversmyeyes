@@ -1,8 +1,7 @@
 // tests3.rs
 //
-// This test isn't testing our function -- make it do that in such a way that
-// the test passes. Then write a second test that tests whether we get the
-// result we expect to get when we call `is_even(5)`.
+// 这个测试没有测试我们的函数 -- 使它以一种使测试通过的方式测试函数。
+// 然后编写第二个测试，测试当我们调用 `is_even(5)` 时是否得到我们期望的结果。
 //
 // Execute `rustlings hint tests3` or use the `hint` watch subcommand for a
 // hint.
@@ -19,11 +18,11 @@ mod tests {
 
     #[test]
     fn is_true_when_even() {
-        assert!();
+        assert!(is_even(4));
     }
 
     #[test]
     fn is_false_when_odd() {
-        assert!();
+        assert!(is_even(5));
     }
 }
