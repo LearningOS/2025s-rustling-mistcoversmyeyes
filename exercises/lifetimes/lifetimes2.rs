@@ -8,6 +8,7 @@
 
 // I AM NOT DONE
 
+// 在明确一定会返回第一个参数的引用的时候， 可以 对生命周期进行解耦合，让输出引用的生命周期绑定那个返回的输入参数。
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
@@ -22,6 +23,6 @@ fn main() {
     {
         let string2 = String::from("xyz");
         result = longest(string1.as_str(), string2.as_str());
+        println!("The longest string is '{}'", result);
     }
-    println!("The longest string is '{}'", result);
 }
