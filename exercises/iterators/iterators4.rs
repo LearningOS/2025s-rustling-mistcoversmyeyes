@@ -15,6 +15,16 @@ pub fn factorial(num: u64) -> u64 {
     // For an extra challenge, don't use:
     // - recursion
     // Execute `rustlings hint iterators4` for hints.
+    
+    // 递归方法
+    if ( num == 0){
+        1
+    }
+    else {
+        num * factorial( num - 1)
+    }
+    // ranges and iterators 方法
+    (1..num).fold(1,|axx ,x| acc * x)
 }
 
 #[cfg(test)]
