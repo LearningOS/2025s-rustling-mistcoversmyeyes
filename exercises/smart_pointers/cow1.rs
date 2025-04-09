@@ -1,14 +1,12 @@
 // cow1.rs
 //
-// This exercise explores the Cow, or Clone-On-Write type. Cow is a
-// clone-on-write smart pointer. It can enclose and provide immutable access to
-// borrowed data, and clone the data lazily when mutation or ownership is
-// required. The type is designed to work with general borrowed data via the
-// Borrow trait.
+// 这个练习探讨了Cow（Clone-On-Write，写时复制）类型。Cow是一种
+// 写时复制的智能指针。它可以封装并提供对借用数据的不可变访问，
+// 并在需要修改或所有权时懒惰地克隆数据。这种类型设计用于
+// 通过Borrow特性处理一般的借用数据。
 //
-// This exercise is meant to show you what to expect when passing data to Cow.
-// Fix the unit tests by checking for Cow::Owned(_) and Cow::Borrowed(_) at the
-// TODO markers.
+// 这个练习旨在展示将数据传递给Cow时会发生什么。
+// 通过在TODO标记处检查Cow::Owned(_)和Cow::Borrowed(_)来修复单元测试。
 //
 // Execute `rustlings hint cow1` or use the `hint` watch subcommand for a hint.
 
@@ -56,11 +54,11 @@ mod tests {
     fn owned_no_mutation() -> Result<(), &'static str> {
         // We can also pass `slice` without `&` so Cow owns it directly. In this
         // case no mutation occurs and thus also no clone, but the result is
-        // still owned because it was never borrowed or mutated.
+        // still owned because it was never borrowed or mutated. a
         let slice = vec![0, 1, 2];
         let mut input = Cow::from(slice);
         match abs_all(&mut input) {
-            // TODO
+            
         }
     }
 

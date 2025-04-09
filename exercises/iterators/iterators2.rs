@@ -11,6 +11,7 @@
 // Complete the `capitalize_first` function.
 // "hello" -> "Hello"
 pub fn capitalize_first(input: &str) -> String {
+    // 对于String 类型,使用
     let mut c = input.chars();
     match c.next() {
         None => String::new(),

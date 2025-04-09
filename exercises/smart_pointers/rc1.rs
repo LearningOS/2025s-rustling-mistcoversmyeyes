@@ -1,12 +1,9 @@
 // rc1.rs
 //
-// In this exercise, we want to express the concept of multiple owners via the
-// Rc<T> type. This is a model of our solar system - there is a Sun type and
-// multiple Planets. The Planets take ownership of the sun, indicating that they
-// revolve around the sun.
+// 在这个练习中，我们想通过 Rc<T> 类型来表达多个所有者的概念。这是一个太阳系的模型 - 有一个 Sun 类型和
+// 多个 Planet。这些行星拥有太阳的所有权，表明它们围绕太阳运转。
 //
-// Make this code compile by using the proper Rc primitives to express that the
-// sun has multiple owners.
+// 通过使用适当的 Rc 原语来表达太阳有多个所有者，使这段代码能够编译。
 //
 // Execute `rustlings hint rc1` or use the `hint` watch subcommand for a hint.
 

@@ -13,6 +13,9 @@
 fn main() {
     let my_fav_fruits = vec!["banana", "custard apple", "avocado", "peach", "raspberry"];
 
+    // iter（） 获取&T
+    // iter_mut() 获取&mut T
+    // into_iter() 获取 T, 转移所有权
     let mut my_iterable_fav_fruits = my_fav_fruits.iter();   // TODO: Step 1
 
     assert_eq!(my_iterable_fav_fruits.next(), Some(&"banana"));
