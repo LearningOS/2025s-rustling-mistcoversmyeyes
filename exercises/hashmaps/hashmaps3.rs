@@ -12,7 +12,7 @@
 //
 // 执行 `rustlings hint hashmaps3` 或使用 `hint` watch 子命令获取提示。
 
-// 我还没有完成
+
 
 use std::collections::HashMap;
 

@@ -14,7 +14,6 @@
 //
 // 执行`rustlings hint errors5`或使用`hint`子命令获取提示。
 
-// I AM NOT DONE
 
 use std::error;
 use std::fmt;

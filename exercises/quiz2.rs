@@ -20,7 +20,6 @@
 //
 // 这次没有提示！
 
-// 我还没完成
 
 pub enum Command {
     Uppercase,

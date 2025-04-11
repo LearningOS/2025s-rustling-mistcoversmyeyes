@@ -4,7 +4,6 @@
 //
 // 执行 `rustlings hint generics1` 或使用 `hint` watch 子命令获取提示。
 
-// I AM NOT DONE
 
 fn main() {
     let mut shopping_list: Vec<&str> = Vec::new();

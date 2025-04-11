@@ -6,7 +6,7 @@
 // Execute `rustlings hint lifetimes2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 // 在明确一定会返回第一个参数的引用的时候， 可以 对生命周期进行解耦合，让输出引用的生命周期绑定那个返回的输入参数。
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {

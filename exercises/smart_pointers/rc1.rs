@@ -9,6 +9,8 @@
 
 // I AM NOT DONE
 
+// Rc的全称是Reference count,是带有引用计数的智能指针
+
 use std::rc::Rc;
 
 #[derive(Debug)]
