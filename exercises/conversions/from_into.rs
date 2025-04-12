@@ -1,4 +1,19 @@
 // from_into.rs
+/*
+ * 本练习演示了 From/Into trait 的实现与应用：
+ *
+ * 1. 学习实现从字符串到自定义类型的无错误转换
+ * 2. 理解 From 和 Into 的互补关系 - 实现 From 自动获得 Into
+ * 3. 掌握字符串解析的常见模式（分割、提取、转换）
+ * 4. 学习处理边缘情况和提供合理默认值的策略
+ * 5. 理解类型转换中的错误处理模式
+ *
+ * From/Into 适用于那些概念上合理且不会失败的转换：
+ * - 构造函数类似的场景
+ * - 不同表示形式之间的转换
+ * - 包装类型与原始类型之间的转换
+ * - 当失败是意料之外的情况时的转换
+ */
 //
 // The From trait is used for value-to-value conversions. If From is implemented
 // correctly for a type, the Into trait should work conversely. You can read
@@ -40,10 +55,36 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.len() == 0{
+            return  Person::default();
+        }
+        else {
+            let parts : Vec<&str> = s.split(',').collect();
+            
+            if parts.len() < 2 || parts[0].is_empty(){
+                return Person::default();
+            }
+
+            let name = parts[0];
+
+            match parts[1].parse::<usize>() {
+                Ok(age) => {
+                    if parts.len() > 2 {
+                        return Person::default();
+                    }
+                    else {
+                        return Person{
+                                name : name.to_string(),
+                                age, 
+                            };
+                    }
+                }
+                Err(_) => Person::default()
+            }
+        }
     }
 }
 
