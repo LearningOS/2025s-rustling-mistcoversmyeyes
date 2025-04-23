@@ -39,9 +39,8 @@ enum IntoColorError {
     IntConversion,
 }
 
-// I AM NOT DONE
 
-// 你的任务是完成此实现并返回一个内部类型为 Color 的 Ok 结果。你需要为三个整数的元组、
+// 你的任务是完成此实现并返回一个内部类型为 Color 的 Ok 结果。你需要为三个整数的元组、t
 // 三个整数的数组和整数切片创建实现。
 //
 // 注意，元组和数组的实现将在编译时进行检查，但切片实现需要检查切片长度！另外请注意，
@@ -53,12 +52,12 @@ impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
     fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
         // 分别检查3个数字的范围
-        if tuple[0] <= 255 && tuple[1] <= 255 &&tuple[2] <= 255
-        && tuple[0] >= 0 && tuple[1] >=0 && tuple[2] >= 0{
-                return Result::Ok(Color{red : tuple[0],green : tuple[1],blue : tuple[2]})
+        if tuple.0 <= 255 && tuple.1 <= 255 &&tuple.2 <= 255
+        && tuple.0 >= 0 && tuple.1 >=0 && tuple.2 >= 0{
+                return Result::Ok(Color{red : tuple.0.try_into().unwrap(),green : tuple.1.try_into().unwrap(),blue : tuple.2.try_into().unwrap()})
         }
         else {
-            return Err(IntoColorError);
+            return Err(IntoColorError::IntConversion);
         }
     }
 }
@@ -67,7 +66,19 @@ impl TryFrom<(i16, i16, i16)> for Color {
 impl TryFrom<[i16; 3]> for Color {
     type Error = IntoColorError;
     fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
-        
+        // 检查三个数据的范围支不支持准确转化到u8
+        if arr.iter().all(|&x| x >= 0 && x <= 255){
+            Result::Ok(
+                Color{  
+                        red : arr[0].try_into().unwrap(),
+                        green : arr[1].try_into().unwrap(),
+                        blue : arr[2].try_into().unwrap()
+                    }
+            )
+        }
+        else {
+            Err(Self::Error::IntConversion)
+        }
     }
 }
 
@@ -75,6 +86,21 @@ impl TryFrom<[i16; 3]> for Color {
 impl TryFrom<&[i16]> for Color {
     type Error = IntoColorError;
     fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        if slice.len() != 3 {
+            Err(IntoColorError::BadLen)
+        }
+        else if slice.iter().any(|&x| x < 0 || x >255) {
+            Err(IntoColorError::IntConversion)
+        }
+        else {
+            Ok(
+                Color{
+                    red : slice[0].try_into().unwrap(),
+                    green : slice[1].try_into().unwrap(),
+                    blue : slice[2].try_into().unwrap()
+                }
+            )
+        }
     }
 }
 
