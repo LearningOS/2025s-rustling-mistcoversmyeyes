@@ -23,7 +23,6 @@
 //
 // 你不应该修改任何现有代码，只需添加两行属性。
 
-// I AM NOT DONE
 
 
 extern "Rust" {
@@ -40,6 +39,7 @@ mod Foo {
     pub fn my_demo_function(a: u32) -> u32 {
         a
     }
+
 }
 
 #[cfg(test)]
@@ -53,10 +53,11 @@ mod tests {
         // wrap them in safe Rust APIs to ease the burden of callers.
         // SAFETY: We know those functions are aliases of a safe
         // Rust function.w those functions are aliases of a safe
-        unsafe {function.
+        unsafe {
             my_demo_function(123);
             my_demo_function_alias(456);
-        }   my_demo_function_alias(456);
+            my_demo_function_alias(456);
+        }
     }   
 }
 
