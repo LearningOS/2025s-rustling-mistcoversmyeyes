@@ -3,11 +3,57 @@
 	This problem requires you to implement a sorting algorithm
 	you can use bubble sorting, insertion sorting, heap sorting, etc.
 */
-// I AM NOT DONE
 
-fn sort<T>(array: &mut [T]){
-	//TODO
+
+// 实现插入排序
+fn insertion_sort<T>(nums: &mut [T])
+// 对array内元素排序，需要元素集合是一个偏序集
+where T: std::cmp::PartialOrd 
+{
+    for i in 1..nums.len() {
+        let mut j = i;
+        while j > 0 && nums[j - 1] > nums[j] {
+            nums.swap(j,j-1);
+            j -= 1;
+        }
+    }
 }
+
+
+fn find_min<T>(nums : &mut [T],start_index : usize)-> usize
+where T : std::cmp::PartialOrd
+{
+    let mut min_index : usize = start_index;
+    for i in start_index..nums.len(){
+        if nums[min_index] > nums[i]{
+            min_index = i;
+        }
+    }
+    min_index
+}
+
+// 实现选择排序
+fn selection_sort<T>(nums : &mut [T])
+where T : std::cmp::PartialOrd
+{
+    // 初始化排序的区域
+    let mut j = 0;
+    
+    // 从未排序的部分找出最大的元素，与当前已排序的元素的后一个元素交换，扩展已排序的数组的范围
+    while j < nums.len(){
+        let i = find_min(nums,j);
+        nums.swap(j, i);
+        j += 1;
+    }
+}
+
+
+fn sort<T>(nums:&mut [T])
+where T : std::cmp::PartialOrd
+{
+    selection_sort(nums);
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

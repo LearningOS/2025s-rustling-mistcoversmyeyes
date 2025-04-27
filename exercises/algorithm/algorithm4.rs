@@ -3,7 +3,8 @@
 	This problem requires you to implement a basic interface for a binary tree
 */
 
-//I AM NOT DONE
+
+// 引入Ordering 模块 和 Debug 模块
 use std::cmp::Ordering;
 use std::fmt::Debug;
 
@@ -50,13 +51,27 @@ where
 
     // Insert a value into the BST
     fn insert(&mut self, value: T) {
-        //TODO
+        match self.root {
+            None => {
+                self.root = Some(Box::new(TreeNode::new(value)));
+            },
+            Some(ref mut root) => {
+                root.insert(value);
+            }
+        }
     }
 
     // Search for a value in the BST
-    fn search(&self, value: T) -> bool {
-        //TODO
-        true
+    fn search(&mut self, value: T) -> bool {
+        match self.root{
+            None => {
+                false
+            }
+            Some(ref mut cur_node_ptr) => {
+                cur_node_ptr.as_mut().search(value)
+            }
+            
+        }
     }
 }
 
@@ -64,9 +79,65 @@ impl<T> TreeNode<T>
 where
     T: Ord,
 {
-    // Insert a node into the tree
+    // Insert a node into the tree,Assume that the tree rooted at curNode NonEmpty。
     fn insert(&mut self, value: T) {
-        //TODO
+        match value.cmp(&self.value){
+            Ordering::Less => {
+                match self.left {
+                    None => {
+                        self.left = Some(Box::new(TreeNode::new(value)));
+                    }
+                    Some (ref mut left_node) => {
+                        left_node.as_mut().insert(value);
+                    }
+                }
+            },
+            Ordering::Equal => {
+                
+            },
+            Ordering::Greater => {
+                match self.right {
+                    None => {
+                        self.right = Some(Box::new(TreeNode::new(value)));
+                    }
+                    Some(ref mut right_node) =>{
+                        right_node.as_mut().insert(value);
+                    }
+                }
+            }
+        }
+    }
+    
+    fn search(&mut self,value:T) -> bool{
+        match self.value.cmp(&value){
+            Ordering::Equal => {
+                true
+            }
+            Ordering::Less => {
+                match self.right {
+                    None => {
+                        false
+                    }
+                    Some(ref mut right_node_ptr) => {
+                        right_node_ptr.as_mut().search(value)
+                    }
+                }
+                
+            }
+            Ordering::Greater => {
+                match self.left {
+                    None => {
+                        false
+                    }
+                    Some(ref mut left_node_ptr) => {
+                        left_node_ptr.as_mut().search(value)
+                    }
+                }
+            }
+        }
+
+
+        
     }
 }
 

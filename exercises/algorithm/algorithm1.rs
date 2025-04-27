@@ -2,8 +2,6 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-// I AM NOT DONE
-
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
 use std::vec::*;
@@ -69,9 +67,49 @@ impl<T> LinkedList<T> {
             },
         }
     }
-	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
-	{
+	pub fn merge( list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
+    where T : std::cmp::PartialOrd + Clone
+    {
+        let mut new_list : LinkedList<T> = LinkedList::<T>::default();
+        let mut a_current = list_a.start;
+        let mut b_current = list_b.start;
 
+        // 同时遍历两个链表
+        while a_current.is_some() && b_current.is_some() {
+            let a_head_ptr = a_current.unwrap();
+            let b_head_ptr = b_current.unwrap();
+            
+            unsafe {
+                let a_cur_val = (*a_head_ptr.as_ptr()).val.clone();
+                let b_cur_val = (*b_head_ptr.as_ptr()).val.clone();
+                
+                if a_cur_val <= b_cur_val {
+                    new_list.add(a_cur_val);
+                    a_current = (*a_head_ptr.as_ptr()).next;
+                } else {
+                    new_list.add(b_cur_val);
+                    b_current = (*b_head_ptr.as_ptr()).next;
+                }
+            }
+        }
+
+        // 处理剩余元素
+        while a_current.is_some() {
+            let a_head_ptr = a_current.unwrap();
+            unsafe {
+                new_list.add((*a_head_ptr.as_ptr()).val.clone());
+                a_current = (*a_head_ptr.as_ptr()).next;
+            }
+        }
+
+        while b_current.is_some() {
+            let b_head_ptr = b_current.unwrap();
+            unsafe {
+                new_list.add((*b_head_ptr.as_ptr()).val.clone());
+                b_current = (*b_head_ptr.as_ptr()).next;
+            }
+        }
+        return new_list;
 	}
 }
 
