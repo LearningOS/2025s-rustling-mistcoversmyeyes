@@ -3,7 +3,6 @@
 	This question requires you to use a stack to achieve a bracket match
 */
 
-// I AM NOT DONE
 #[derive(Debug)]
 struct Stack<T> {
 	size: usize,
@@ -31,8 +30,15 @@ impl<T> Stack<T> {
 		self.size += 1;
 	}
 	fn pop(&mut self) -> Option<T> {
-		// TODO
-		None
+		match self.data.pop() {
+			None => {
+				None
+			}
+			Some(val) => {
+				self.size -= 1;
+				Some(val)
+			}
+		}
 	}
 	fn peek(&self) -> Option<&T> {
 		if 0 == self.size {
@@ -73,7 +79,8 @@ impl<T: Clone> Iterator for IntoIter<T> {
 	type Item = T;
 	fn next(&mut self) -> Option<Self::Item> {
 		if !self.0.is_empty() {
-			self.0.size -= 1;self.0.data.pop()
+			self.0.size -= 1;
+			self.0.data.pop()
 		} 
 		else {
 			None
@@ -92,7 +99,7 @@ impl<'a, T> Iterator for Iter<'a, T> {
 struct IterMut<'a, T: 'a> {
 	stack: Vec<&'a mut T>,
 }
-impl<'a, T> Iterator for IterMut<'a, T> {
+impl<'a, T> Iterator for  IterMut<'a, T> {
 	type Item = &'a mut T;
 	fn next(&mut self) -> Option<Self::Item> {
 		self.stack.pop()
@@ -101,10 +108,20 @@ impl<'a, T> Iterator for IterMut<'a, T> {
 
 fn bracket_match(bracket: &str) -> bool
 {
-	//TODO
-	true
+	let mut wait_stack = Stack::new();
+	for c in bracket.chars() {
+		match c {
+			'(' | '{' | '[' => {
+				wait_stack.push(c);
+			}
+			')' => if wait_stack.pop() != Some('(') {return false;}
+			']' => if wait_stack.pop() != Some('[') {return false;}
+			'}' => if wait_stack.pop() != Some('{') {return false;}
+			_ =>  {}
+		}
+	}
+	wait_stack.is_empty()
 }
-
 #[cfg(test)]
 mod tests {
 	use super::*;
